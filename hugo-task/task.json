@@ -2,7 +2,7 @@
     "id": "5F838DA4-D713-497A-BD7A-4987F25E3C2F",
     "name": "HugoTask",
     "friendlyName": "Hugo",
-    "description": "Generate a site using Hugo, a Fast and Flexible Website Generator",
+    "description": "Generate a static web site using Hugo, a Fast and Flexible Website Generator",
     "author": "Giulio Vian",
     "helpMarkDown": "[More Information on Task](https://github.com/giuliov/hugo-vsts-extension/README.md), for [Information on Hugo](https://gohugo.io/).",
     "category": "Build",

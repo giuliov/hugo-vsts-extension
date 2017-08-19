@@ -1,6 +1,6 @@
 Generates a site using Hugo, a Fast and Flexible Website Generator.
 
-![Hugo logo here](./images/hugo-logo.png)
+[![Hugo logo here](images/hugo-logo.png)](https://gohugo.io/)
 
 # Usage
 
@@ -17,12 +17,12 @@ You can specify some common options:
 - **Include Future** to include content with publishdate in the future;
 - **Use Ugly URLs** to use `/filename.html` instead of `/filename/`.
 
-![Build Task Arguments screenshot here](./images/BuildTaskArguments.png)
+![Build Task Arguments screenshot here](images/BuildTaskArguments.png)
 
 More Information on Hugo on [this site](https://gohugo.io/).
 
 # Release Notes
 
-## 0.9.8
+## 0.9.11
 
 - Initial release

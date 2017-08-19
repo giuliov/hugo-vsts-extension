@@ -1,10 +1,10 @@
 {
     "manifestVersion": 1,
     "id": "hugo-extension",
-    "version": "0.9.9",
+    "version": "0.9.11",
     "name": "Hugo",
     "publisher": "giuliovdev",
-    "description": "Generates a site using Hugo, a Fast and Flexible Website Generator.",
+    "description": "Generates a static web site using Hugo, a Fast and Flexible Website Generator.",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
@@ -39,7 +39,7 @@
     },
     "links": {
         "getstarted": {
-            "uri": "https://github.com/giuliov/hugo-vsts-extension/README.md"
+            "uri": "https://github.com/giuliov/hugo-vsts-extension/blob/master/README.md"
         },
         "support": {
             "uri": "https://github.com/giuliov/hugo-vsts-extension/issues"
