@@ -1,0 +1,98 @@
+{
+    "id": "5F838DA4-D713-497A-BD7A-4987F25E3C2F",
+    "name": "HugoTask",
+    "friendlyName": "Hugo",
+    "description": "Generate a site using Hugo, a Fast and Flexible Website Generator",
+    "author": "Giulio Vian",
+    "helpMarkDown": "[More Information on Task](https://github.com/giuliov/hugo-vsts-extension/README.md), for [Information on Hugo](https://gohugo.io/).",
+    "category": "Build",
+    "visibility": [
+        "Build"
+    ],
+    "demands": [],
+    "version": {
+        "Major": 1,
+        "Minor": 0,
+        "Patch": 0
+    },
+    "minimumAgentVersion": "1.95.0",
+    "instanceNameFormat": "Hugo generate $(source)",
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": false
+        }
+    ],
+    "inputs": [
+        {
+            "name": "source",
+            "type": "filePath",
+            "label": "Source",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Relative path from repo root of the Hugo sources."
+        },
+        {
+            "name": "destination",
+            "type": "filePath",
+            "label": "Destination",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Path of Hugo generated site."
+        },        
+        {
+            "name": "hugoVersion",
+            "type": "string",
+            "label": "Hugo Version",
+            "required": false,
+            "helpMarkDown": "If the preferred version cannot be found, the latest version found will be used instead. Use `latest`, `0.25.1`, `0.24`, but not `v0.24`.",
+            "defaultValue": "latest"
+        },
+        {
+            "name": "baseURL",
+            "type": "string",
+            "label": "Base URL",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Hostname (and path) to the root, e.g. http://spf13.com/."
+        },
+        {
+            "name": "buildDrafts",
+            "type": "boolean",
+            "label": "Include Drafts",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "Include content marked as draft."
+        },
+        {
+            "name": "buildExpired",
+            "type": "boolean",
+            "label": "Include Expired",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "Include expired content."
+        },
+        {
+            "name": "buildFuture",
+            "type": "boolean",
+            "label": "Include Future",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "Include content with publishdate in the future."
+        },
+        {
+            "name": "uglyURLs",
+            "type": "boolean",
+            "label": "Use Ugly URLs",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "If true, use /filename.html instead of /filename/."
+        }
+    ],
+    "execution": {
+        "PowerShell3": {
+            "target": "HugoTask.ps1"
+        }
+    }
+}
