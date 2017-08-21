@@ -4,7 +4,7 @@ Generates a site using Hugo, a Fast and Flexible Website Generator.
 
 # Usage
 
-The Build Task will download the `hugo` executable, if the version is not already present on the build machine, and invoke it.
+The Build Task will automatically download the `hugo` executable, if the version is not already present on the build machine, and invoke it.
 
 You can specify some common options.
 
@@ -21,8 +21,10 @@ You can specify some common options.
 
 More Information on Hugo on [this site](https://gohugo.io/).
 
+The Hugo logos are copyright © Steve Francia 2013–2017.
+
 # Release Notes
 
-## 0.9.12
+## 1.0.0
 
 - Initial release

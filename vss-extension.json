@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "hugo-extension",
-    "version": "0.9.12",
+    "version": "1.0.0",
     "name": "Hugo",
     "publisher": "giuliovdev",
     "description": "Generates a static web site using Hugo, a Fast and Flexible Website Generator.",
@@ -10,6 +10,9 @@
             "id": "Microsoft.VisualStudio.Services"
         }
     ],
+    "galleryFlags": [
+        "Public"
+    ],         
     "icons": {
         "default": "img/hugo-128x128.png"
     },
