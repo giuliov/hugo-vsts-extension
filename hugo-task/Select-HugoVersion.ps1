@@ -31,6 +31,8 @@ function Select-HugoVersion {
 
 
 function Invoke-GitHubAPI($api) {
+    # github api now only accepts TLS 1.2, see https://githubengineering.com/crypto-removal-notice/
+    [System.Net.ServicePointManager]::SecurityProtocol = @("Tls12")
     # stick with v3 API
     $x = Invoke-WebRequest -Uri "https://api.github.com${api}" -Headers @{"accept"="application/vnd.github.v3+json"} -UseBasicParsing
     return $x.Content | ConvertFrom-Json    
