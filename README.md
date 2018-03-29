@@ -25,6 +25,10 @@ The Hugo logos are copyright © Steve Francia 2013–2017.
 
 # Release Notes
 
+## 1.0.1
+
+- Use TLS 1.2 for GitHub API ([PR#3](https://github.com/giuliov/hugo-vsts-extension/pull/3))
+
 ## 1.0.0
 
 - Initial release
