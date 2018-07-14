@@ -10,7 +10,7 @@ try {
     [string]$source = Get-VstsInput -Name Source
     [string]$destination = Get-VstsInput -Name Destination
     [string]$hugoVersion = Get-VstsInput -Name HugoVersion
-    [bool]$extendedVersion = Get-VstsInput -Name ExtendedVersion
+    [bool]$extendedVersion = Get-VstsInput -Name ExtendedVersion -AsBool
     [string]$baseURL = Get-VstsInput -Name BaseURL
 
     [bool]$buildDrafts = Get-VstsInput -Name BuildDrafts -AsBool
