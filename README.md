@@ -20,6 +20,8 @@ You can specify some common options.
 
 ![Build Task Arguments screenshot here](images/BuildTaskArguments.png)
 
+A detailed walk through is here [Building a Hugo Site with the VSTS Extension](vsts-extension-step-by-step.md)
+
 More Information on Hugo on [this site](https://gohugo.io/).
 
 The Hugo logos are copyright © Steve Francia 2013–2018.
