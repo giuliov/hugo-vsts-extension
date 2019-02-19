@@ -4,7 +4,7 @@
     "friendlyName": "Hugo",
     "description": "Generate a static web site using Hugo, a Fast and Flexible Website Generator",
     "author": "Giulio Vian",
-    "helpMarkDown": "[More Information on Task](https://github.com/giuliov/hugo-vsts-extension/README.md), for [Information on Hugo](https://gohugo.io/).",
+    "helpMarkDown": "[More Information on Task](https://github.com/giuliov/hugo-vsts-extension/blob/master/README.md), for [Information on Hugo](https://gohugo.io/).",
     "category": "Build",
     "visibility": [
         "Build"
@@ -40,7 +40,7 @@
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "Path of Hugo generated site."
-        },        
+        },
         {
             "name": "hugoVersion",
             "type": "string",
