@@ -96,6 +96,14 @@
             "defaultValue": "false",
             "required": false,
             "helpMarkDown": "If true, use /filename.html instead of /filename/."
+        },
+        {
+            "name": "EnableMinification",
+            "type": "boolean",
+            "label": "Enable Minification",
+            "defaultValue": "true",
+            "required": false,
+            "helpMarkDown": "If true, hugo will minify the generated files."
         }
     ],
     "execution": {
