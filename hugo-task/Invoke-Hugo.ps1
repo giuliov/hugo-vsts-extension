@@ -11,7 +11,9 @@ function Invoke-Hugo {
         [bool]$buildDrafts,
         [bool]$buildExpired,
         [bool]$buildFuture,
-        [bool]$uglyURLs
+        [bool]$uglyURLs,
+        [bool]$minify,
+        [string]$additionalFlags
     )
 
     Trace-VstsEnteringInvocation $MyInvocation
@@ -29,10 +31,11 @@ function Invoke-Hugo {
         if ($buildExpired) { $flags += " --buildExpired" }
         if ($buildFuture) { $flags += " --buildFuture" }
         if ($uglyURLs) { $flags += " --uglyURLs" }
+        if ($minify) { $flags += " --minify" }
 
         $implicitFlags = " --enableGitInfo --i18n-warnings --verbose"
         
-        Invoke-VstsTool -FileName $hugoExePath -Arguments "${flags} ${implicitFlags}" -RequireExitCodeZero
+        Invoke-VstsTool -FileName $hugoExePath -Arguments "${flags} ${implicitFlags} ${additionalFlags}" -RequireExitCodeZero
         #Invoke-Expression "${hugoExePath} ${flags} ${implicitFlags}"
         
     } finally {

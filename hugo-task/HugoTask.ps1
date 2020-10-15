@@ -17,6 +17,9 @@ try {
     [bool]$buildExpired = Get-VstsInput -Name BuildExpired -AsBool
     [bool]$buildFuture = Get-VstsInput -Name BuildFuture -AsBool
     [bool]$uglyURLs = Get-VstsInput -Name UglyURLs -AsBool
+    [bool]$minify = Get-VstsInput -Name Minify -AsBool
+    [string]$additionalFlags = Get-VstsInput -Name AdditionalFlags
+
 
     Assert-VstsPath -LiteralPath $source -PathType Container
 
@@ -33,7 +36,7 @@ try {
         return
     }
     [string]$hugoExePath = Get-HugoExecutable -SourceUrl $versionInfo.DownloadURL -Version $versionInfo.Version
-    Invoke-Hugo -hugoExePath $hugoExePath -source $source -destination $destination -baseURL $baseURL -buildDrafts $buildDrafts -buildExpired $buildExpired -buildFuture $buildFuture -uglyURLs $uglyURLs
+    Invoke-Hugo -hugoExePath $hugoExePath -source $source -destination $destination -baseURL $baseURL -buildDrafts $buildDrafts -buildExpired $buildExpired -buildFuture $buildFuture -uglyURLs $uglyURLs -minify $minify -additionalFlags $additionalFlags
 
 
 } finally {
