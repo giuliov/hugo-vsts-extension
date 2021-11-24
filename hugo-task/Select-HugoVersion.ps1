@@ -23,7 +23,7 @@ function Select-HugoVersion
 
         Write-Verbose "Found release $( $release.name )"
 
-        $win64hugo = $release.assets | where { $_.name -like '*Windows*64*' }
+        $win64hugo = $release.assets | where { $_.name -like '*Windows*64bi*' }
 
         # extended since 0.43
         $DownloadURL = $win64hugo.browser_download_url

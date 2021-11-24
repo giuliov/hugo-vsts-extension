@@ -17,6 +17,8 @@ You can specify some common options.
 - **Include Expired**: to include expired content, passed as `--buildExpired` flag.
 - **Include Future**: to include content with publishdate in the future, passed as `--buildFuture` flag.
 - **Use Ugly URLs**: to use `/filename.html` instead of `/filename/`, passed as `--uglyURLs` flag.
+- **Minify**: to minify the output, passed as `--minify` flag.
+- **Additional Args**: to add [additional parameters](https://gohugo.io/commands/hugo/) for hugo.
 
 ![Build Task Arguments screenshot here](images/BuildTaskArguments.png)
 
@@ -27,6 +29,11 @@ More Information on Hugo on [this site](https://gohugo.io/).
 The Hugo logos are copyright © Steve Francia 2013–2018.
 
 # Release Notes
+
+## 1.2.0
+
+- Adding --minify switch
+- Adding additional parameters as text input
 
 ## 1.1.0
 
