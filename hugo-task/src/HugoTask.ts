@@ -5,41 +5,41 @@ import * as os from 'os';
 import * as path from 'path';
 import * as util from 'util';
 
-let osPlat: string = os.platform();
-let osArch: string = os.arch();
+const osPlat: string = os.platform();
+const osArch: string = os.arch();
 const cacheKey = 'hugo';
 
-async function run(): Promise<void> {
+async function run() {
     try {
         tl.setResourcePath(path.join(__dirname, "task.json"));
 
         // download version
-        let hugoVersion: string = tl.getInput("hugoVersion", false);
-        let extendedVersion: boolean = tl.getBoolInput('extendedVersion', false);
+        const hugoVersion: string = tl.getInput("hugoVersion", false);
+        const extendedVersion: boolean = tl.getBoolInput('extendedVersion', false);
 
         await getHugo(hugoVersion, extendedVersion);
 
-        let source: string = tl.getPathInput('source', true, false);
-        let destination: string = tl.getPathInput('destination', true, false);
-        let baseURL: string = tl.getInput('baseURL', false);
-        let buildDrafts: boolean = tl.getBoolInput('buildDrafts', false);
-        let buildExpired: boolean = tl.getBoolInput('buildExpired', false);
-        let buildFuture: boolean = tl.getBoolInput('buildFuture', false);
-        let uglyURLs: boolean = tl.getBoolInput('uglyURLs', false);;
+        const source: string = tl.getPathInput('source', true, false);
+        const destination: string = tl.getPathInput('destination', true, false);
+        const baseURL: string = tl.getInput('baseURL', false);
+        const buildDrafts: boolean = tl.getBoolInput('buildDrafts', false);
+        const buildExpired: boolean = tl.getBoolInput('buildExpired', false);
+        const buildFuture: boolean = tl.getBoolInput('buildFuture', false);
+        const additionalArgs: string = tl.getInput('additionalArgs', false);
 
-        let hugoPath = tl.which(cacheKey, true);
-        let hugo: tr.ToolRunner = tl.tool(hugoPath);
+        const hugoPath = tl.which(cacheKey, true);
+        const hugo: tr.ToolRunner = tl.tool(hugoPath);
 
-        hugo.argIf(source, '--source ' + source);
-        hugo.argIf(destination, '--destination ' + destination);
-        hugo.argIf(baseURL, '--baseURL ' + baseURL);
+        hugo.argIf(source, ['--source',source]);
+        hugo.argIf(destination, ['--destination',destination]);
+        hugo.argIf(baseURL, ['--baseURL ',baseURL]);
         hugo.argIf(buildDrafts, '--buildDrafts');
         hugo.argIf(buildExpired, '--buildExpired');
         hugo.argIf(buildFuture, '--buildFuture');
-        hugo.argIf(uglyURLs, '--uglyURLs');
 
         // implicit flags
-        hugo.line(' --enableGitInfo --i18n-warnings --verbose');
+        hugo.line(' --i18n-warnings --path-warnings --verbose');
+        hugo.line(additionalArgs);
 
         await hugo.exec();
 
@@ -59,7 +59,7 @@ async function getHugo(version: string, extendedVersion: boolean): Promise<void>
         tl.debug("Hugo tool is cached under " + toolPath);
     }
 
-    toolPath = path.join(toolPath, 'bin');
+    ////toolPath = path.join(toolPath, 'bin');
     //
     // prepend the tools path. instructs the agent to prepend for future tasks
     //
@@ -70,8 +70,8 @@ async function acquireHugo(version: string, extendedVersion: boolean): Promise<s
     //
     // Download - a tool installer intimately knows how to get the tool (and construct urls)
     //
-    let fileName: string = getFileName(version, extendedVersion);
-    let downloadUrl: string = getDownloadUrl(version, fileName);
+    const fileName: string = getFileName(version, extendedVersion);
+    const downloadUrl: string = getDownloadUrl(version, fileName);
     let downloadPath: string = null;
     try {
         downloadPath = await toolLib.downloadTool(downloadUrl);
@@ -85,7 +85,7 @@ async function acquireHugo(version: string, extendedVersion: boolean): Promise<s
     }
 
     //make sure agent version is latest then 2.115.0
-    tl.assertAgent('2.115.0');
+    tl.assertAgent('2.105.7');
 
     //
     // Extract
@@ -106,17 +106,17 @@ async function acquireHugo(version: string, extendedVersion: boolean): Promise<s
     //
     // Install into the local tool cache - node extracts with a root folder that matches the fileName downloaded
     //
-    let toolRoot = path.join(extPath, cacheKey);
-    return await toolLib.cacheDir(toolRoot, cacheKey, version);
+    /////const toolRoot = path.join(extPath, cacheKey);
+    return await toolLib.cacheDir(extPath, cacheKey, version);
 }
 
 function getFileName(version: string, extendedVersion: boolean): string {
     // 'aix', 'darwin', 'freebsd', 'linux', 'openbsd', 'sunos', and 'win32'.
-    let platform: string = osPlat == "win32" ? "windows" : osPlat;
+    const platform: string = osPlat == "win32" ? "windows" : osPlat;
     // 'arm', 'arm64', 'ia32', 'mips', 'mipsel', 'ppc', 'ppc64', 's390', 's390x', 'x32', and 'x64'.
-    let arch: string = osArch == "x64" ? "amd64" : "386";
-    let ext: string = osPlat == "win32" ? "zip" : "tar.gz";
-    let filename: string = extendedVersion
+    const arch: string = osArch == "x64" ? "64bit" : "33bit";
+    const ext: string = osPlat == "win32" ? "zip" : "tar.gz";
+    const filename: string = extendedVersion
         ? util.format("hugo_extended_%s_%s-%s.%s", version, platform, arch, ext)
         : util.format("hugo_%s_%s-%s.%s", version, platform, arch, ext);
     return filename;

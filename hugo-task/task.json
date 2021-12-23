@@ -91,12 +91,12 @@
             "helpMarkDown": "Include content with publishdate in the future."
         },
         {
-            "name": "uglyURLs",
-            "type": "boolean",
-            "label": "Use Ugly URLs",
-            "defaultValue": "false",
+            "name": "additionalArgs",
+            "type": "string",
+            "label": "Any additional argument",
+            "defaultValue": "",
             "required": false,
-            "helpMarkDown": "If true, use /filename.html instead of /filename/."
+            "helpMarkDown": "Additional arguments to pass to Hugo."
         }
     ],
     "execution": {

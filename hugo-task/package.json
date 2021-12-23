@@ -2,25 +2,29 @@
   "name": "HugoTask",
   "description": "HugoTask",
   "scripts": {
-    "build": "npm run clean && npm run lint && npm run transpile ",
+    "build": "npm run clean && npm run lint && npm run transpile",
     "package": "npm prune -production && npm run copy",
-    "copy": "ncp ./node_modules ./node_modules && ncp ./dist/src .",
-    "clean": "rimraf ./dist/src && rimraf ./dist/test && rimraf ./*.js && rimraf ./*.js.map && rimraf ./node_modules",
-    "transpile": "tsc -p ./",
-    "lint": "tslint -c tslint.json *.ts test/*.ts",
+    "copy": "ncp ./node_modules ./node_modules && ncp ./dist/src . && rimraf ./dist",
+    "copy___": "ncp ./node_modules ./node_modules && ncp ./dist/src .",
+    "clean": "rimraf ./dist/src && rimraf ./dist/test && rimraf ./src/*.js && rimraf ./src/*.js.map && rimraf ./*.js && rimraf ./*.js.map && rimraf ./node_modules",
+    "transpile": "tsc -p .",
+    "lint": "npm install @typescript-eslint/eslint-plugin@latest --save-dev && eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "mocha -r ts-node/register ./test/*.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./test-output/test-results.xml ",
     "test-no-logger": "mocha -r ts-node/register ./test/*.ts "
   },
-  "main": "HugoTask.js",
+  "main": "src/HugoTask.js",
   "dependencies": {
-    "@types/node": "^10.17.0",
+    "@types/node": "^12.22.0",
     "@types/mocha": "^5.2.7",
-    "azure-pipelines-tool-lib": "^1.0.0-preview.0",
-    "azure-pipelines-task-lib": "^3.0.6-preview.0",
-    "azure-pipelines-tasks-utility-common": "^3.0.0-preview.0"
+    "azure-pipelines-tool-lib": "^1.0.2",
+    "azure-pipelines-task-lib": "^3.1.10",
+    "azure-pipelines-tasks-utility-common": "^3.0.3"
   },
   "devDependencies": {
-    "typescript": "4.0.2"
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
+    "eslint": "^8.5.0",
+    "typescript": "^4.5.4"
   },
   "author": "Giulio Vian",
   "license": "MIT",

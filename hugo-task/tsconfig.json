@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "ES5",
+        "target": "ES6",
         "module": "commonjs",
          "watch": false,
          "outDir": ".",
@@ -9,7 +9,7 @@
            "src/",
            "test/"
          ],
-         "outDir": "dist",
+         "outDir": "dist/src",
          "sourceMap":  true
       },
       "baseUrl": ".",
