@@ -1,2 +1,4 @@
 dist/
 test/PUBLISH
+test/TOOLS/
+test/TEMP/

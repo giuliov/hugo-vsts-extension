@@ -16,7 +16,7 @@ You can specify some common options.
 - **Include Drafts**: to include content marked as draft, passed as `--buildDrafts` flag.
 - **Include Expired**: to include expired content, passed as `--buildExpired` flag.
 - **Include Future**: to include content with publishdate in the future, passed as `--buildFuture` flag.
-- **Use Ugly URLs**: to use `/filename.html` instead of `/filename/`, passed as `--uglyURLs` flag.
+- ~~**Use Ugly URLs**: to use `/filename.html` instead of `/filename/`, passed as `--uglyURLs` flag.~~
 
 ![Build Task Arguments screenshot here](images/BuildTaskArguments.png)
 
@@ -30,7 +30,9 @@ The Hugo logos are copyright © Steve Francia 2013–2022.
 
 ## 2.0
 
-- Cross-platform
+- New Cross-platform implementation.
+- Removed `uglyURLs` option, deprecated since Hugo 0.xx ???
+- Added `additionalArgs` option to allow custom arguments.
 
 ## 1.1.0
 

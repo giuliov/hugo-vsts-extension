@@ -1,6 +1,9 @@
+"use strict";
+
 import * as toolLib from 'azure-pipelines-tool-lib/tool';
 import tl = require("azure-pipelines-task-lib/task");
 import tr = require("azure-pipelines-task-lib/toolrunner");
+import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import * as util from 'util';
@@ -49,6 +52,14 @@ async function run() {
 }
 
 async function getHugo(version: string, extendedVersion: boolean): Promise<void> {
+    const latest: string = 'latest';
+    if (version && version !== latest) {
+        version = sanitizeVersionString(version);
+    }
+    if (version == latest) {
+        version = await getLatestGitHubRelease();
+    }
+
     // check cache
     let toolPath: string;
     toolPath = toolLib.findLocalTool(cacheKey, version);
@@ -59,11 +70,26 @@ async function getHugo(version: string, extendedVersion: boolean): Promise<void>
         tl.debug("Hugo tool is cached under " + toolPath);
     }
 
-    ////toolPath = path.join(toolPath, 'bin');
-    //
     // prepend the tools path. instructs the agent to prepend for future tasks
-    //
     toolLib.prependPath(toolPath);
+}
+
+const defaultHugoVersion: string = '0.91.2';
+
+async function getLatestGitHubRelease(): Promise<string> {
+    const latestReleaseUrl: string = 'https://api.github.com/repos/gohugoio/hugo/releases/latest?draft=false';
+    let latestVersion = defaultHugoVersion;
+    // TODO At most once a day? where to cache whether run today?
+    try {
+        const downloadPath = await toolLib.downloadTool(latestReleaseUrl);
+        const response = JSON.parse(fs.readFileSync(downloadPath, 'utf8').toString().trim());
+        if (response.tag_name) {
+            latestVersion = response.tag_name.substring(1); // skip 'v' prefix
+        }
+    } catch (error) {
+        tl.warning(util.format('Error while fetching Latest version from %s, assuming %s: %s', latestReleaseUrl, latestVersion, error));
+    }
+    return latestVersion;
 }
 
 async function acquireHugo(version: string, extendedVersion: boolean): Promise<string> {
@@ -75,10 +101,11 @@ async function acquireHugo(version: string, extendedVersion: boolean): Promise<s
     let downloadPath: string = null;
     try {
         downloadPath = await toolLib.downloadTool(downloadUrl);
+        // TODO check SHA
     } catch (error) {
         tl.debug(error);
 
-        // cannot localized the string here because to localize we need to set the resource file.
+        // cannot localize the string here because to localize we need to set the resource file.
         // which can be set only once. azure-pipelines-tool-lib/tool, is already setting it to different file.
         // So left with no option but to hardcode the string. Other tasks are doing the same.
         throw (util.format("Failed to download version %s. Please verify that the version is valid and resolve any other issues. %s", version, error));
@@ -87,9 +114,7 @@ async function acquireHugo(version: string, extendedVersion: boolean): Promise<s
     //make sure agent version is latest then 2.115.0
     tl.assertAgent('2.105.7');
 
-    //
     // Extract
-    //
     let extPath: string;
     extPath = tl.getVariable('Agent.TempDirectory');
     if (!extPath) {
@@ -103,10 +128,7 @@ async function acquireHugo(version: string, extendedVersion: boolean): Promise<s
         extPath = await toolLib.extractTar(downloadPath);
     }
 
-    //
     // Install into the local tool cache - node extracts with a root folder that matches the fileName downloaded
-    //
-    /////const toolRoot = path.join(extPath, cacheKey);
     return await toolLib.cacheDir(extPath, cacheKey, version);
 }
 
@@ -114,7 +136,7 @@ function getFileName(version: string, extendedVersion: boolean): string {
     // 'aix', 'darwin', 'freebsd', 'linux', 'openbsd', 'sunos', and 'win32'.
     const platform: string = osPlat == "win32" ? "windows" : osPlat;
     // 'arm', 'arm64', 'ia32', 'mips', 'mipsel', 'ppc', 'ppc64', 's390', 's390x', 'x32', and 'x64'.
-    const arch: string = osArch == "x64" ? "64bit" : "33bit";
+    const arch: string = osArch == "x64" ? "64bit" : "32bit";
     const ext: string = osPlat == "win32" ? "zip" : "tar.gz";
     const filename: string = extendedVersion
         ? util.format("hugo_extended_%s_%s-%s.%s", version, platform, arch, ext)
@@ -126,5 +148,14 @@ function getDownloadUrl(version: string, filename: string): string {
     return util.format("https://github.com/gohugoio/hugo/releases/download/v%s/%s", version, filename);
 }
 
+// handle user input scenerios
+function sanitizeVersionString(inputVersion: string) : string{
+    const version = toolLib.cleanVersion(inputVersion);
+    if(!version) {
+        throw new Error(tl.loc("NotAValidSemverVersion"));
+    }
+    
+    return version;
+}
 
 run();

@@ -1,5 +1,6 @@
-$env:INPUT_HUGOVERSION = "0.88.0"
-$env:INPUT_EXTENDEDVERSION = 'false'
+$env:INPUT_HUGOVERSION = "0.68.1"
+$env:INPUT_HUGOVERSION = "latest"
+$env:INPUT_EXTENDEDVERSION = 'true'
 
 $env:TASK_TEST_TRACE=1
 $env:Agent_ToolsDirectory='C:\src\github.com\giuliov\hugo-azdo-extension\hugo-task\test\TOOLS'
