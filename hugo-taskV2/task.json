@@ -1,0 +1,108 @@
+{
+    "id": "005cdf89-1a76-4bd7-8f27-1620d46211a3",
+    "name": "HugoTask",
+    "friendlyName": "Hugo",
+    "description": "Generate a static web site using Hugo, a Fast and Flexible Website Generator (cross-platform task).",
+    "author": "Giulio Vian",
+    "helpMarkDown": "[More Information on Task](https://github.com/giuliov/hugo-vsts-extension/blob/master/README.md), for [Information on Hugo](https://gohugo.io/).",
+    "category": "Build",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "demands": [],
+    "version": {
+        "Major": 2,
+        "Minor": 0,
+        "Patch": 0
+    },
+    "minimumAgentVersion": "2.105.7",
+    "instanceNameFormat": "Hugo generate $(source)",
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": false
+        }
+    ],
+    "inputs": [
+        {
+            "name": "source",
+            "type": "filePath",
+            "label": "Source",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Relative path from repo root of the Hugo sources."
+        },
+        {
+            "name": "destination",
+            "type": "filePath",
+            "label": "Destination",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Path of Hugo generated site."
+        },
+        {
+            "name": "hugoVersion",
+            "type": "string",
+            "label": "Hugo Version",
+            "required": false,
+            "helpMarkDown": "If the preferred version cannot be found, the latest version found will be used instead. Use `latest`, `0.25.1`, `0.24`, but not `v0.24`.",
+            "defaultValue": "latest"
+        },
+        {
+            "name": "extendedVersion",
+            "type": "boolean",
+            "label": "Extended Version",
+            "defaultValue": false,
+            "required": false,
+            "helpMarkDown": "Download SCSS/SASS support."
+        },
+        {
+            "name": "baseURL",
+            "type": "string",
+            "label": "Base URL",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Hostname (and path) to the root, e.g. http://spf13.com/."
+        },
+        {
+            "name": "buildDrafts",
+            "type": "boolean",
+            "label": "Include Drafts",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "Include content marked as draft."
+        },
+        {
+            "name": "buildExpired",
+            "type": "boolean",
+            "label": "Include Expired",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "Include expired content."
+        },
+        {
+            "name": "buildFuture",
+            "type": "boolean",
+            "label": "Include Future",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "Include content with publishdate in the future."
+        },
+        {
+            "name": "additionalArgs",
+            "type": "string",
+            "label": "Any additional argument",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Additional arguments to pass to Hugo."
+        }
+    ],
+    "execution": {
+        "Node10": {
+            "target": "HugoTask.js",
+            "argumentFormat": ""
+        }
+    }
+}
