@@ -1,8 +1,8 @@
 {
     "manifestVersion": 1,
     "id": "hugo-extension",
-    "version": "1.99.0",
-    "name": "Hugo (v2 preview)",
+    "version": "2.0.5",
+    "name": "Hugo",
     "publisher": "giuliovdev",
     "description": "Generates a static web site using Hugo, a Fast and Flexible Website Generator.",
     "targets": [
