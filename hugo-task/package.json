@@ -4,9 +4,9 @@
   "scripts": {
     "build": "npm run clean && npm run lint && npm run transpile",
     "package": "npm prune -production && npm run copy",
-    "copy": "ncp ./node_modules ./node_modules && ncp ./dist/src . && rimraf ./dist",
-    "copy___": "ncp ./node_modules ./node_modules && ncp ./dist/src .",
-    "clean": "rimraf ./dist/src && rimraf ./dist/test && rimraf ./src/*.js && rimraf ./src/*.js.map && rimraf ./*.js && rimraf ./*.js.map && rimraf ./node_modules",
+    "___copy": "ncp ./dist/src . && rimraf ./dist",
+    "copy": "npx mkdirp ../hugo-taskV2  &&  ncp ./node_modules ../hugo-taskV2/node_modules && ncp ./dist/src ../hugo-taskV2/ &&  copyfiles *.json *.png ../hugo-taskV2/",
+    "clean": "rimraf ./dist && rimraf ./src/*.js ./src/*.js.map ./*.js ./*.js.map && rimraf ./node_modules",
     "transpile": "tsc -p .",
     "lint": "npm install @typescript-eslint/eslint-plugin@latest --save-dev && eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "mocha -r ts-node/register ./test/*.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./test-output/test-results.xml ",
@@ -23,6 +23,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
+    "copyfiles": "latest",
     "eslint": "^8.5.0",
     "typescript": "^4.5.4"
   },

@@ -52,7 +52,7 @@ async function run() {
 }
 
 async function getHugo(version: string, extendedVersion: boolean): Promise<void> {
-    const latest: string = 'latest';
+    const latest = 'latest';
     if (version && version !== latest) {
         version = sanitizeVersionString(version);
     }
@@ -74,10 +74,10 @@ async function getHugo(version: string, extendedVersion: boolean): Promise<void>
     toolLib.prependPath(toolPath);
 }
 
-const defaultHugoVersion: string = '0.91.2';
+const defaultHugoVersion = '0.91.2';
 
 async function getLatestGitHubRelease(): Promise<string> {
-    const latestReleaseUrl: string = 'https://api.github.com/repos/gohugoio/hugo/releases/latest?draft=false';
+    const latestReleaseUrl = 'https://api.github.com/repos/gohugoio/hugo/releases/latest?draft=false';
     let latestVersion = defaultHugoVersion;
     // TODO At most once a day? where to cache whether run today?
     try {
@@ -133,10 +133,27 @@ async function acquireHugo(version: string, extendedVersion: boolean): Promise<s
 }
 
 function getFileName(version: string, extendedVersion: boolean): string {
+    let platform: string = osPlat;
     // 'aix', 'darwin', 'freebsd', 'linux', 'openbsd', 'sunos', and 'win32'.
-    const platform: string = osPlat == "win32" ? "windows" : osPlat;
+    switch (osPlat) {
+        case 'win32':
+            platform = 'windows';
+            break;
+        case 'darwin':
+            platform = 'macOS';
+            break;
+    }
+    let arch: string = osArch;
     // 'arm', 'arm64', 'ia32', 'mips', 'mipsel', 'ppc', 'ppc64', 's390', 's390x', 'x32', and 'x64'.
-    const arch: string = osArch == "x64" ? "64bit" : "32bit";
+    switch (osArch) {
+        case 'x64':
+            arch = '64bit';
+            break;
+        case 'ia32':
+        case 'x32':
+            arch = '32bit';
+            break;
+    }
     const ext: string = osPlat == "win32" ? "zip" : "tar.gz";
     const filename: string = extendedVersion
         ? util.format("hugo_extended_%s_%s-%s.%s", version, platform, arch, ext)

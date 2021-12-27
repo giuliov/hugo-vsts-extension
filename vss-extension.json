@@ -1,8 +1,8 @@
 {
     "manifestVersion": 1,
-    "id": "hugo-extension",
-    "version": "2.0",
-    "name": "Hugo",
+    "id": "hugo-extension-preview",
+    "version": "2.0.2",
+    "name": "Hugo (Preview)",
     "publisher": "giuliovdev",
     "description": "Generates a static web site using Hugo, a Fast and Flexible Website Generator.",
     "targets": [
@@ -12,7 +12,7 @@
     ],
     "galleryFlags": [
         "Public"
-    ],         
+    ],
     "icons": {
         "default": "img/hugo-128x128.png"
     },
@@ -21,7 +21,7 @@
         "vso.release_execute"
     ],
     "categories": [
-        "Build and release"
+        "Azure Pipelines"
     ],
     "tags": [
         "hugo",
@@ -60,13 +60,13 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "hugo-task"
+                "name": "hugo-taskV2"
             }
         }
     ],
     "files": [
         {
-            "path": "hugo-task",
+            "path": "hugo-taskV2/",
             "addressable": false
         },
         {
