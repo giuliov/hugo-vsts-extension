@@ -41,7 +41,7 @@ async function run() {
         hugo.argIf(buildFuture, '--buildFuture');
 
         // implicit flags
-        hugo.line(' --i18n-warnings --path-warnings --verbose');
+        hugo.line(' --verbose');
         hugo.line(additionalArgs);
 
         await hugo.exec();
